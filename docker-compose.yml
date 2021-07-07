@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  api:
+    build:
+      context: .
+    restart: always
+#    ports:
+#      - 5000:5000
+    depends_on:
+      - mysql_db
+    networks:
+      - app-net
+  
+  mysql_db:
+    image: mysql
+    command:
+      - --default-authentication-plugin=mysql_native_password
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - ./sql/:/docker-entrypoint-initdb.d/:ro
+    cap_add:
+      - SYS_NICE
+    environment:
+      MYSQL_DATABASE: app
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: NuMc3kEsrVSa3YN8
+      MYSQL_ROOT_PASSWORD: NuMc3kEsrVSa3YN8
+      LC_ALL: C.UTF-8
+    networks:
+      - app-net
+networks:
+  app-net:
