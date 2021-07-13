@@ -4,20 +4,26 @@
 ## API 제 기능
 API 에서 제공하는 기능은 다음과 같습니다. 
 * 기업 검색 기능 - 기업 명칭 검색, 연관 검색 기능 제공
+  <pre>GET /search/company?name=[search]</pre>
 * 태그 검색 기능 - 태그를 통한 연관 기업 검색
+  <pre>GET /search/tag?name=[search]</pre>
 * 태그 추가 기능 
-* 태그 삭제 기능 
+  <pre>POST /add/tag -d 'name=[tag]&lang=[en/ko/ja]&companies=[company_group_id1],[company_group_id2],[company_group_id3]'</pre>
+* 태그 삭제 기능
+  <pre>DELETE /delete/tag/[tag_group_id]</pre>
+
+## 사용법
+### container 생성
+<pre>
+$ cd get-corps
+$ docker-compose up -d --build
+</pre>
 
 ## 환경 
 기능은 Docker compose 를 사용하여 컨테이너 환경에서 테스트해 볼 수 있도록 개발했습니다.
 AlpineOS 환경에서 백엔드 소스가 위치하는 api 서비스와 MysqlDB 가 위치한 mysql_db 서비스로 이미지를 분리 생성했습니다. 
 
 그리고 api 서비스는 5000 포트가, mysql_db 서비스는 3306 포트가 외부와 매핑되어 있습니다. 
-
-테스트 환경 세팅은 다음 명령어를 통해 해주시면 좋을 것 같습니다.  
-<pre>
-$ docker-compose up -d --build
-</pre>
 
 ## 소프트웨어
 개발 작업은 Python Flask Framework를 활용하여 작업했습니다. 

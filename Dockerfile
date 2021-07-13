@@ -21,6 +21,6 @@ RUN apk add --no-cache --virtual .build-deps \
     && apk del .build-deps
 
 COPY app.py app.py
-COPY api/ .
+COPY api/ api/
 
 CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
